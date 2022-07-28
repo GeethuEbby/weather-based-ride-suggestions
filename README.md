@@ -213,13 +213,15 @@ if __name__ == '__main__':
 ![Login_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Login_Page.png)
 
 - User can enter username and password to login to the dashboard. User must be authenticated to access their dashboard.
+- Credentials for Mary Jane - mary/mary
+- Credentials for Alex Doe - alex/alex
 
 #### Home Page
 
 ![Home_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Home_Pg.jpg)
 
 -	Weather cards displaying day of the week, date and expected mean weather for the day.
--	Map showing location of traveller (blue marker) and closest vehicles (red markers).
+-	Map showing location of the logged in traveller (blue marker) and closest vehicles (red markers).
 
 #### Notifications 
 
@@ -227,7 +229,7 @@ if __name__ == '__main__':
 
 -	Navigation bar shows badge if there is a notification.
 -	Warning displays day when inclement weather is expected.
--	Table with details of rides that are available to choose.
+-	Table with details of rides that are available to choose for the logged in traveller.
 
 #### Booking a Ride
 
@@ -249,16 +251,16 @@ if __name__ == '__main__':
 
 ![UseCase](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/63e23df1b34c6d16b6f81ce33b698b77e29771fb/UseCase.jpg)
 
--	The traveller accesses the dashboard via URL.
--	User navigates t o Home Page and sees the weather forecast for the week.
--	He can also see the taxis of his fuel preference available nearby.
--	User go to Notification Tab. A badge is displayed on Nav bar if there is any alert.
+-	The traveller accesses the dashboard via URL *http://127.0.0.1:8050/*
+-	User logs into the application with username and password
+-	User navigates to Home Page and sees the weather forecast for the week.
+-	He can also see the nearby taxis of his fuel preference.
+-	User go to Notification Tab. A badge is displayed on Nav bar if there is any weather alert for the week.
 -	User view the weather alert.
--	User can choose a ride from the list that is available on the page.
--	This is the list of vehicle details that are available for the user to choose from.
--	User clicks on a record. The details are displayed in the banner below. 
+-	User can choose a ride from the table that is available on the page, by clicking on the desired row. 
 -	User confirm the ride by clicking Book button.
 -	A pop up is displayed confirming that the booking was successful.
+-	User logs out of the application
 
 ### Conclusion
 
