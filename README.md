@@ -83,3 +83,6 @@ The following variables are used to store the dataset.
 -	edges_df -> most_edges.csv
 -	emission_df -> most.emissionTime.csv
 -	fcdgeoTime_df -> most.fcdgeoTime.csv
+
+## Experimental Set Up:
+For development purpose, traveller profiles are created for two users Alex and Mary whose preferred travel mode is ebike and fuel preference is either electric or petrol/diesel vehicle. Vehicle profiles are also generated via code, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
