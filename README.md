@@ -8,6 +8,9 @@ Modern consumers need modern solutions. This project attempts to utilize the wea
 
 The objective of Mobility Recommendation – Dashboard is to generate a dashboard for a traveller where he can access weekly weather information, see any notifications arising due to inclement weather, choose vehicle recommendations and pre-book a vehicle for the day, see profile information and can access a vehicle scheduler. Vehicles are recommended for days of inclement weather and based on the passenger’s fuel preference.
 
+## Experimental Set Up:
+For development purpose, we consider traveller profiles for two users Alex and Mary, whose preferred travel mode is ebike and fuel preference is either electric or petrol/diesel vehicle. Vehicle profiles are also generated, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
+
 ## Data Flow Diagram
 ![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/d64740ba70ef928a8ebb8141fe379729e0257c8e/Data%20Flow.jpg)
 
@@ -84,8 +87,6 @@ The following variables are used to store the dataset.
 -	emission_df -> most.emissionTime.csv
 -	fcdgeoTime_df -> most.fcdgeoTime.csv
 
-## Experimental Set Up:
-For development purpose, traveller profiles are created for two users Alex and Mary whose preferred travel mode is ebike and fuel preference is either electric or petrol/diesel vehicle. Vehicle profiles are also generated via code, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
 
 ## Data Cleaning:
 It is very important to clean and format the data before proceeding any further. After using pandas library to read the csv files, the datasets are formatted as below.
@@ -102,10 +103,13 @@ Since the dataset is rather large, we need to narrow down the area of interest. 
 The clustering is done based on the geolocation. Elbow method to identify optimum number of latitude and longitude clusters. The dataset used is edges_df. A subset of the dataset is created as there are multiple value of lane and edges. Here, laneID, latitude and longitude are used for clustering.
 With elbow method, k=7 is chosen and K means clustering is used to cluster. ‘cluster_label’ column contains the labelled cluster number for each row. The clustered data frame is merged with the original data frame and assigned to clustered_edges_df.
 
+*The clustering function is defined in loc_clustering.ipynb and function name is cluster_fn()* 
+
 ![Cluster Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/ef84b0f090e248679e2caa58b293395b09c938b8/Cluster.jpg)
 
 For all further development purpose, cluster 1 is chosen as area of interest.
 The emission_df data frame (which contains the vehicle information) and fcdgeoTime_df data frame (which contains the traveller information) is merged and reassigned to new variables to based on laneId and edgeId, with clustered_edges_df. This is to get the cluster and location information for the vehicles and travellers.
+
 
 ## Creating Profiles
 As the datasets for traveller and vehicles are ready, now we proceed to create some personalized profile information for travellers and vehicles. Note: Vehicles are filtered as taxi and uber. Since there are multiple instances for a traveller in the dataset, due to the various locations across various time period, to create the profile, we need to group the dataset based on person_id. For development purpose, two travellers are chosen and various attributes are added for them.
@@ -117,12 +121,14 @@ As the datasets for traveller and vehicles are ready, now we proceed to create s
 
 Since there are multiple instances for a vehicle in the dataset, due to the various locations across various time period, to create the profile, we need to group the dataset based on vehicle_id. For the vehicles that are identified in cluster 1, filtered as taxi and Uber, fuel type of vehicle (electric, petrol, diesel), driver name and phone number are added to each vehicle.
 
-## Weather Info
+## Weather Data
 
 Our intend is to recommend alternate mode of transport for passengers in case of inclement weather. Weekly weather information which included the temperature, date, weather is read into weather_df.
 To identify chance of rain, a column is added which indicate 1 if there is any chance of rain else 0. We can obtain this from the ‘Weather’ column. Now we look at the weather for the next 1 week and see if there are any days with inclement weather. Then a list is created with rainy days of the week and assigned to rainy_days.
+*The clustering function is defined in rain_alert_fn.ipynb and function name is rainy_days()* 
 
-## Vehicle Recommendation
+
+## Vehicle Recommendation Engine
 We have gathered, cleaned and formatted all the data required for the recommendation. Now we proceed with identifying the nearest vehicles for the passenger.
 
 -	If the number of rainy days in the week is greater than 1, execute the following code.
@@ -169,7 +175,7 @@ if __name__ == '__main__':
 ````
 -	Visit http://127.0.0.1:8050/ in your web browser to view the dashboard.
 
-## Dashboard UI
+## Dashboard UI Components
 
 #### Login Page
 
