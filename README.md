@@ -70,3 +70,14 @@ from .defs.vehicle_recommendation import veh_rec # function for finding the clos
 import warnings
 warnings.filterwarnings("ignore")
 ````
+## Dataset:
+The project uses the following datasets in CSV format
+•	most_edges.csv contains the edges/lanes ids with geo coordinates for whole edges length.
+•	mostemissiontime.csv contain information for all vehicles logged per hour/minute of the day.
+•	most.fcdgeo.csv contains the vehicle and pedestrian way points.
+•	WeeklyWeather.csv contains the weekly weather information.
+The following variables are used to store the dataset.
+
+edges_df -> most_edges.csv
+emission_df -> most.emissionTime.csv
+fcdgeoTime_df -> most.fcdgeoTime.csv
