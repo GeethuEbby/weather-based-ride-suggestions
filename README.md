@@ -17,3 +17,19 @@ The data that we have is huge and inorder to make an efficient system, we need t
 Now, from the weather data, we identify the days with a chance of rain. This data along with the vehicle and traveller data is passed to the recommendation engine. The engine uses haversine formula to determines the closest longitudes and latitudes to the passenger. The available vehicles are identified based on the user's preference for an electric or petrol/diesel vehicle.
 
 The dashboard layout is built and data is passed to the dashboard. User can access the dashboard, once authenticated, and can book a suggested ride.
+
+## Pre-Requisites:
+The project is using the following version of Python interpreter.
+````
+	3.9.7 (default, Sep 16 2021, 16:59:28) [MSC v.1916 64 bit (AMD64)]
+````
+Install dash to bind user interface to the code. In the terminal, run the following code for installation.
+````
+pip install plotly
+pip install plotly_express # To be installed for any older versions of plotly
+pip install dash	(In case of version issues, use pip install dash –upgrade. This project is using ver 2.5.1).
+pip install dash-leaflet	#for interactive maps
+pip install dash-extensions 	#for interactive maps
+pip install dash-bootstrap-components #Bootstrap components for consistently styled apps with complex, responsive layouts
+````
+
