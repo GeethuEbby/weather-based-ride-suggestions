@@ -170,3 +170,6 @@ if __name__ == '__main__':
 -	Visit http://127.0.0.1:8050/ in your web browser to view the dashboard.
 
 ## Dashboard UI
+
+#### Login Page
+
