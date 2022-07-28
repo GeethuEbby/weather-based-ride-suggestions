@@ -142,5 +142,5 @@ def distance(lat1, lon1, lat2, lon2 ):
 ````
 -	The function uses the Haversine formula to calculate the distance. It calculates great-circle distances between the two points – that is, the shortest distance over the earth’s surface, given their longitudes and latitudes.
 
-$\hav(c) = hav(a-b) + sin(a) sin(b) hav(C)$
+$\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 
