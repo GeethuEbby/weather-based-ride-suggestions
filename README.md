@@ -125,35 +125,64 @@ Since there are multiple instances for a vehicle in the dataset, due to the vari
 
 Our intend is to recommend alternate mode of transport for passengers in case of inclement weather. Weekly weather information which included the temperature, date, weather is read into weather_df.
 To identify chance of rain, a column is added which indicate 1 if there is any chance of rain else 0. We can obtain this from the ‘Weather’ column. Now we look at the weather for the next 1 week and see if there are any days with inclement weather. Then a list is created with rainy days of the week and assigned to rainy_days.
-*The clustering function is defined in rain_alert_fn.ipynb and function name is rainy_days()* 
+*The clustering function is defined in rain_alert_fn.ipynb and function name is rainy_days().* 
 
 
-## Vehicle Recommendation Engine
+## Vehicle Recommendation Engine and Dashboard Creation
+
 We have gathered, cleaned and formatted all the data required for the recommendation. Now we proceed with identifying the nearest vehicles for the passenger.
+*The vehicles are identified using the function defined in vehicle_recommendation.ipynb and function name is veh_rec().* 
+*Vehicle data, traveller data and weather data are passed as inputs to the function.* 
 
--	If the number of rainy days in the week is greater than 1, execute the following code.
-	-	From the ebike_travellers dataset, grouped by person_id, using itertuples() loop through the rows and identify if traveller_name == Mary Jane.
-	-	The traveller geolocation and name are stored in variables.
-	-	Now, for vehicles grouped by vehicle_id, loop through the dataset using itertuples().
-	-	Get the geolocations in an array variable.
-	-	The locations are passed to a user defined function, closest.
+-	IF the number of rainy days in the week is greater than 1, THEN
+	-	FOR each traveller grouped by person_id
+			IF traveller_name IS Mary Jane THEN
+				STORE traveller geolocation and name in variables.
+				FOR each vehicle grouped by vehicle_id
+					APPEND the geolocations in an array variable.
+				CALL user defined function, closest WITH geo-locations of traveller and vehicles 
+				RETURNS closest location to the traveller
+				CALL user defined function, second_nearest WITH geo-locations of traveller and vehicles 
+				RETURNS second_closest location to the traveller
+				CALL user defined function, third_nearest WITH geo-locations of traveller and vehicles 
+				RETURNS third_closest location to the traveller
+				FILTER the vehicles with fuel type = electric and is closest, second closest and third closest to the passenger 
+			IF traveller_name IS Alex Joe THEN
+				STORE traveller geolocation and name in variables.
+				FOR each vehicle grouped by vehicle_id
+					APPEND the geolocations in an array variable.
+				CALL user defined function, closest WITH geo-locations of traveller and vehicles 
+				RETURNS closest location to the traveller
+				CALL user defined function, second_nearest WITH geo-locations of traveller and vehicles 
+				RETURNS second_closest location to the traveller
+				CALL user defined function, third_nearest WITH geo-locations of traveller and vehicles 
+				RETURNS third_closest location to the traveller
+				FILTER the vehicles with fuel type = petrol/diesel and is closest, second closest and third closest to the passenger 
+
+
 ````
-def closest(data, v):
-min_ = min(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))
-return min_
 def distance(lat1, lon1, lat2, lon2 ):
     p = 0.017453292519943295
     hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
     return 12742 * asin(sqrt(hav))
+
+def closest(data, v):
+    min_ = min(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))
+    return min_
+def second_nearest(data, v):
+    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[1]
+def third_nearest(data, v):
+    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[2]
+
 ````
--	The function uses the Haversine formula to calculate the distance. It calculates great-circle distances between the two points – that is, the shortest distance over the earth’s surface, given their longitudes and latitudes.
+-	The nearest points are identified by Haversine formula. It calculates great-circle distances between the two points – that is, the shortest distance over the earth’s surface, given their longitudes and latitudes.
 
 $\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 
 -	Also, the second nearest and third nearest distances are calculated by using the same formula and sorting the results to get the second and third minimums.
--	Once the locations are identified, the vehicle dataset is filtered where the geolocation is among the geolocation identified in the above step(ie, closest, second closest and third closest) and fuel_type is the preferred fuel of passenger.
 -	Now variables are created with data to be passed to dashboard.
 -	Map with marker location of the passenger and vehicle identified is prepared and saved as html to be displayed as iFrame in dashboard.
+-	The vehicles are identified using the function defined in prepare_map.ipynb and function name is map_html().
 -	Dashboard is created using dash Plotly library. 
 -	External stylesheets for the dash are imported to apply styling.
 -	The dashboard is initialized and dependencies are added with the below code
@@ -167,6 +196,8 @@ app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTS
 -	The Dash HTML Components module (dash.html) has a component for every HTML tag.
 -	The Dash Core Components module (dash.dcc) contains higher-level components that are interactive and are generated with JavaScript, HTML, and CSS through the React.js library.
 -	Once the frame work is created, call back functions are added as well. The are functions that are automatically called by Dash whenever an input component's property changes, in order to update some property in another component (the output).
+-	A simple authentication is added to the dashboard. User has to enter the username and password to access the dashboard.
+-	Each user is navigated to their corresponding dashboard based on username. 
 -	To access the dashboard, the following code is run.
 ````
 if __name__ == '__main__':
