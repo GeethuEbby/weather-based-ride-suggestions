@@ -112,5 +112,6 @@ As the datasets for traveller and vehicles are ready, now we proceed to create s
 -	traveller_name=["Mary Jane","Alex Joe"]
 -	fuel_preference=["electric","petrol/diesel"]
 -	travel_mode = ["ebike","ebike"]
+
 *The above information can be read as: Mary Jane usually travels in an ebike and prefers electric vehicles as an alternate mode of transport.*
 
