@@ -133,9 +133,9 @@ To identify chance of rain, a column is added which indicate 1 if there is any c
 We have gathered, cleaned and formatted all the data required for the recommendation. Now we proceed with identifying the nearest vehicles for the passenger.
 *The vehicles are identified using the function defined in vehicle_recommendation.ipynb and function name is veh_rec().* 
 *Vehicle data, traveller data and weather data are passed as inputs to the function.* 
-
--	IF the number of rainy days in the week is greater than 1, THEN
-	-	FOR each traveller grouped by person_id
+````
+	IF the number of rainy days in the week is greater than 1, THEN
+		FOR each traveller grouped by person_id
 			IF traveller_name IS Mary Jane THEN
 				STORE traveller geolocation and name in variables.
 				FOR each vehicle grouped by vehicle_id
@@ -158,7 +158,7 @@ We have gathered, cleaned and formatted all the data required for the recommenda
 				CALL user defined function, third_nearest WITH geo-locations of traveller and vehicles 
 				RETURNS third_closest location to the traveller
 				FILTER the vehicles with fuel type = petrol/diesel and is closest, second closest and third closest to the passenger 
-
+````
 
 ````
 def distance(lat1, lon1, lat2, lon2 ):
