@@ -140,4 +140,7 @@ def distance(lat1, lon1, lat2, lon2 ):
     hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
     return 12742 * asin(sqrt(hav))
 ````
+-	The function uses the Haversine formula to calculate the distance. It calculates great-circle distances between the two points – that is, the shortest distance over the earth’s surface, given their longitudes and latitudes.
+
+$ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 
