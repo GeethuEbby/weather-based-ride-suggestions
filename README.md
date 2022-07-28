@@ -131,5 +131,13 @@ We have gathered, cleaned and formatted all the data required for the recommenda
 	-	Now, for vehicles grouped by vehicle_id, loop through the dataset using itertuples().
 	-	Get the geolocations in an array variable.
 	-	The locations are passed to a user defined function, closest.
-
+````
+def closest(data, v):
+min_ = min(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))
+return min_
+def distance(lat1, lon1, lat2, lon2 ):
+    p = 0.017453292519943295
+    hav = 0.5 - cos((lat2-lat1)*p)/2 + cos(lat1*p)*cos(lat2*p) * (1-cos((lon2-lon1)*p)) / 2
+    return 12742 * asin(sqrt(hav))
+````
 
