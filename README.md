@@ -36,7 +36,7 @@ Install ipynb to allow to import ipynb modules, run the following code for insta
 ````
 pip install ipynb
 ````
-## Dependent Libraries:
+### Dependent Libraries:
 The following libraries need to be installed and imported as well.
 ````
 #For data manipulation
