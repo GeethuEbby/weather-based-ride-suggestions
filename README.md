@@ -107,3 +107,10 @@ With elbow method, k=7 is chosen and K means clustering is used to cluster. ‘c
 For all further development purpose, cluster 1 is chosen as area of interest.
 The emission_df data frame (which contains the vehicle information) and fcdgeoTime_df data frame (which contains the traveller information) is merged and reassigned to new variables to based on laneId and edgeId, with clustered_edges_df. This is to get the cluster and location information for the vehicles and travellers.
 
+## Creating Profiles
+As the datasets for traveller and vehicles are ready, now we proceed to create some personalized profile information for travellers and vehicles. Note: Vehicles are filtered as taxi and uber. Since there are multiple instances for a traveller in the dataset, due to the various locations across various time period, to create the profile, we need to group the dataset based on person_id. For development purpose, two travellers are chosen and various attributes are added for them.
+-	traveller_name=["Mary Jane","Alex Joe"]
+-	fuel_preference=["electric","petrol/diesel"]
+-	travel_mode = ["ebike","ebike"]
+*The above information can be read as: Mary Jane usually travels in an ebike and prefers electric vehicles as an alternate mode of transport.*
+
