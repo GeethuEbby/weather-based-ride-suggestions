@@ -184,3 +184,49 @@ if __name__ == '__main__':
 -	Weather cards displaying day of the week, date and expected mean weather for the day.
 -	Map showing location of traveller (blue marker) and closest vehicles (red markers).
 
+#### Notifications 
+
+![Notification_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Notification_Pg.jpg)
+
+-	Navigation bar shows badge if there is a notification.
+-	Warning displays day when inclement weather is expected.
+-	Table with details of rides that are available to choose.
+
+#### Booking a Ride
+
+![Booking_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Notification_Confirm_Pg.jpg)
+
+-	Click on a row to choose a ride.
+-	Click on ‘Book’ button to confirm the ride.
+
+#### Profile
+
+![Profile_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Profile_Pg.jpg)
+
+-	User account information
+-	User vehicle scheduler
+
+### Use Case Diagram
+
+##### How to Book a Ride
+
+![UseCase](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/63e23df1b34c6d16b6f81ce33b698b77e29771fb/UseCase.jpg)
+
+-	The traveller accesses the dashboard via URL.
+-	User navigates t o Home Page and sees the weather forecast for the week.
+-	He can also see the taxis of his fuel preference available nearby.
+-	User go to Notification Tab. A badge is displayed on Nav bar if there is any alert.
+-	User view the weather alert.
+-	User can choose a ride from the list that is available on the page.
+-	This is the list of vehicle details that are available for the user to choose from.
+-	User clicks on a record. The details are displayed in the banner below. 
+-	User confirm the ride by clicking Book button.
+-	A pop up is displayed confirming that the booking was successful.
+
+### Conclusion
+
+Based on the weather forecast, we can efficiently recommend rides for customers. By learning their preferences and travel routes, functionalities such as recommending fuel efficient alternatives, in case no recommendations of choice, can also be implemented by further improving the algorithm.
+
+
+
+
