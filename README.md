@@ -86,3 +86,20 @@ The following variables are used to store the dataset.
 
 ## Experimental Set Up:
 For development purpose, traveller profiles are created for two users Alex and Mary whose preferred travel mode is ebike and fuel preference is either electric or petrol/diesel vehicle. Vehicle profiles are also generated via code, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
+
+## Data Cleaning:
+It is very important to clean and format the data before proceeding any further. After using pandas library to read the csv files, the datasets are formatted as below.
+-	'Time_of_Day' column in emission_df & fcdgeoTime_df data frames is converted to datetime format
+-	For the above column, hours, minutes and seconds are extracted to separate columns.
+-	Other columns are converted to appropriate datatype format
+-	Columns are renamed to consistently access across dataframes.
+-	String variables are converted to lowercase.
+-	edgeID, laneID, person_edge, vehicle_route time_col columns are formatted to remove special characters.
+
+## Clustering the Dataset
+Since the dataset is rather large, we need to narrow down the area of interest. The locations available are clustered into various sections and among them one cluster is chosen for development purpose.
+
+The clustering is done based on the geolocation. Elbow method to identify optimum number of latitude and longitude clusters. The dataset used is edges_df. A subset of the dataset is created as there are multiple value of lane and edges. Here, laneID, latitude and longitude are used for clustering.
+With elbow method, k=7 is chosen and K means clustering is used to cluster. ‘cluster_label’ column contains the labelled cluster number for each row. The clustered data frame is merged with the original data frame and assigned to clustered_edges_df.
+
+
