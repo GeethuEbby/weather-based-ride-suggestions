@@ -102,7 +102,7 @@ Since the dataset is rather large, we need to narrow down the area of interest. 
 The clustering is done based on the geolocation. Elbow method to identify optimum number of latitude and longitude clusters. The dataset used is edges_df. A subset of the dataset is created as there are multiple value of lane and edges. Here, laneID, latitude and longitude are used for clustering.
 With elbow method, k=7 is chosen and K means clustering is used to cluster. ‘cluster_label’ column contains the labelled cluster number for each row. The clustered data frame is merged with the original data frame and assigned to clustered_edges_df.
 
-![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/ef84b0f090e248679e2caa58b293395b09c938b8/Cluster.jpg)
+![Cluster Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/ef84b0f090e248679e2caa58b293395b09c938b8/Cluster.jpg)
 
 For all further development purpose, cluster 1 is chosen as area of interest.
 The emission_df data frame (which contains the vehicle information) and fcdgeoTime_df data frame (which contains the traveller information) is merged and reassigned to new variables to based on laneId and edgeId, with clustered_edges_df. This is to get the cluster and location information for the vehicles and travellers.
@@ -172,4 +172,15 @@ if __name__ == '__main__':
 ## Dashboard UI
 
 #### Login Page
+
+![Login_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Login_Page.png)
+
+- User can enter username and password to login to the dashboard. User must be authenticated to access their dashboard.
+
+#### Home Page
+
+![Home_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Home_Pg.jpg)
+
+-	Weather cards displaying day of the week, date and expected mean weather for the day.
+-	Map showing location of traveller (blue marker) and closest vehicles (red markers).
 
