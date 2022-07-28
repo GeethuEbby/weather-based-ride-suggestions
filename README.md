@@ -152,6 +152,7 @@ $\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 -	External stylesheets for the dash are imported to apply styling.
 -	The dashboard is initialized and dependencies are added with the below code
 ````
-app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP, dbc.icons.FONT_AWESOME], suppress_callback_exceptions=True)
+app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTSTRAP, 
+	dbc.icons.BOOTSTRAP, dbc.icons.FONT_AWESOME], suppress_callback_exceptions=True)
 ````
 
