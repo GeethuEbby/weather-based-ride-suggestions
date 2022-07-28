@@ -115,3 +115,21 @@ As the datasets for traveller and vehicles are ready, now we proceed to create s
 
 *The above information can be read as: Mary Jane usually travels in an ebike and prefers electric vehicles as an alternate mode of transport.*
 
+Since there are multiple instances for a vehicle in the dataset, due to the various locations across various time period, to create the profile, we need to group the dataset based on vehicle_id. For the vehicles that are identified in cluster 1, filtered as taxi and Uber, fuel type of vehicle (electric, petrol, diesel), driver name and phone number are added to each vehicle.
+
+## Weather Info
+
+Our intend is to recommend alternate mode of transport for passengers in case of inclement weather. Weekly weather information which included the temperature, date, weather is read into weather_df.
+To identify chance of rain, a column is added which indicate 1 if there is any chance of rain else 0. We can obtain this from the ‘Weather’ column. Now we look at the weather for the next 1 week and see if there are any days with inclement weather. Then a list is created with rainy days of the week and assigned to rainy_days.
+
+## Vehicle Recommendation
+We have gathered, cleaned and formatted all the data required for the recommendation. Now we proceed with identifying the nearest vehicles for the passenger.
+
+-	If the number of rainy days in the week is greater than 1, execute the following code.
+	o	From the ebike_travellers dataset, grouped by person_id, using itertuples() loop through the rows and identify if traveller_name == Mary Jane.
+	o	The traveller geolocation and name are stored in variables.
+	o	Now, for vehicles grouped by vehicle_id, loop through the dataset using itertuples().
+	o	Get the geolocations in an array variable.
+	o	The locations are passed to a user defined function, closest.
+
+
