@@ -144,3 +144,14 @@ def distance(lat1, lon1, lat2, lon2 ):
 
 $\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 
+-	Also, the second nearest and third nearest distances are calculated by using the same formula and sorting the results to get the second and third minimums.
+-	Once the locations are identified, the vehicle dataset is filtered where the geolocation is among the geolocation identified in the above step(ie, closest, second closest and third closest) and fuel_type is the preferred fuel of passenger.
+-	Now variables are created with data to be passed to dashboard.
+-	Map with marker location of the passenger and vehicle identified is prepared and saved as html to be displayed as iFrame in dashboard.
+-	Dashboard is created using dash Plotly library. 
+-	External stylesheets for the dash are imported to apply styling.
+-	The dashboard is initialized and dependencies are added with the below code
+````
+app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTSTRAP, dbc.icons.BOOTSTRAP, dbc.icons.FONT_AWESOME], suppress_callback_exceptions=True)
+````
+
