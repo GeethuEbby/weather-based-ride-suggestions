@@ -155,4 +155,16 @@ $\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTSTRAP, 
 	dbc.icons.BOOTSTRAP, dbc.icons.FONT_AWESOME], suppress_callback_exceptions=True)
 ````
+-	Dash apps are composed of two parts. The first part is the "layout" of the app and it describes what the application looks like. The second part describes the interactivity of the application.
+-	Layout elements for the dashboard are created and added to the app.
+-	The layout is composed of a tree of "components" such as html.Div and dash.dcc.
+-	The Dash HTML Components module (dash.html) has a component for every HTML tag.
+-	The Dash Core Components module (dash.dcc) contains higher-level components that are interactive and are generated with JavaScript, HTML, and CSS through the React.js library.
+-	Once the frame work is created, call back functions are added as well. The are functions that are automatically called by Dash whenever an input component's property changes, in order to update some property in another component (the output).
+-	To access the dashboard, the following code is run.
+````
+if __name__ == '__main__':
+    app.run_server(debug=True, use_reloader=False)
+
+````
 
