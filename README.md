@@ -126,10 +126,10 @@ To identify chance of rain, a column is added which indicate 1 if there is any c
 We have gathered, cleaned and formatted all the data required for the recommendation. Now we proceed with identifying the nearest vehicles for the passenger.
 
 -	If the number of rainy days in the week is greater than 1, execute the following code.
-	o	From the ebike_travellers dataset, grouped by person_id, using itertuples() loop through the rows and identify if traveller_name == Mary Jane.
-	o	The traveller geolocation and name are stored in variables.
-	o	Now, for vehicles grouped by vehicle_id, loop through the dataset using itertuples().
-	o	Get the geolocations in an array variable.
-	o	The locations are passed to a user defined function, closest.
+	-	From the ebike_travellers dataset, grouped by person_id, using itertuples() loop through the rows and identify if traveller_name == Mary Jane.
+	-	The traveller geolocation and name are stored in variables.
+	-	Now, for vehicles grouped by vehicle_id, loop through the dataset using itertuples().
+	-	Get the geolocations in an array variable.
+	-	The locations are passed to a user defined function, closest.
 
 
