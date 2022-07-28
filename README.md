@@ -26,10 +26,47 @@ The project is using the following version of Python interpreter.
 Install dash to bind user interface to the code. In the terminal, run the following code for installation.
 ````
 pip install plotly
-pip install plotly_express # To be installed for any older versions of plotly
-pip install dash	(In case of version issues, use pip install dash –upgrade. This project is using ver 2.5.1).
-pip install dash-leaflet	#for interactive maps
-pip install dash-extensions 	#for interactive maps
-pip install dash-bootstrap-components #Bootstrap components for consistently styled apps with complex, responsive layouts
+pip install plotly_express 		# To be installed for any older versions of plotly
+pip install dash			# (In case of version issues, use pip install dash –upgrade. This project is using ver 2.5.1).
+pip install dash-leaflet		# for interactive maps
+pip install dash-extensions 		# for interactive maps
+pip install dash-bootstrap-components 	# Bootstrap components for consistently styled apps with complex, responsive layouts
 ````
+Install ipynb to allow to import ipynb modules, run the following code for installation.
+````
+pip install ipynb
+````
+## Dependent Libraries:
+The following libraries need to be installed and imported as well.
+````
+#For data manipulation
+import pandas as pd
+import numpy as np
+import random as r
+import names
+import math
+import datetime
+import folium
 
+# For Dashboard
+import dash
+from dash import dash_table
+import dash_leaflet as dl
+from dash import Dash, dcc, html
+import dash_bootstrap_components as dbc
+from dash import Input, Output, State
+import dash_auth
+import plotly.express as px
+from dash.dependencies import Input, Output, State
+
+# For importing ipynb files
+import ipynb.fs
+from .defs.loc_clustering import cluster_fn 	# for clustering locations based on geo code
+from .defs.rain_alert_fn import rainy_days 	# function for checking inclement weather days
+from .defs.prepare_map import map_html 		# function for building the map for dashboard
+from .defs.vehicle_recommendation import veh_rec # function for finding the closest vehicles available for the passenger
+
+
+import warnings
+warnings.filterwarnings("ignore")
+````
