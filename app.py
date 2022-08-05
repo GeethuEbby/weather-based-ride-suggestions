@@ -49,12 +49,12 @@ import dash_auth
 import plotly.express as px
 from dash.dependencies import Input, Output, State
 
-from .loc_clustering import cluster_fn
+from loc_clustering import cluster_fn
 import ipynb.fs
 #from defs.loc_clustering import cluster_fn # for clustering locations based on geo code
-from defs.rain_alert_fn import rainy_days # function for checking inclement weather days
-from defs.prepare_map import map_html # function for building the map for dashboard
-from defs.vehicle_recommendation import veh_rec # function for finding the closest vehicles available for the passenger
+#from defs.rain_alert_fn import rainy_days # function for checking inclement weather days
+#from defs.prepare_map import map_html # function for building the map for dashboard
+#from defs.vehicle_recommendation import veh_rec # function for finding the closest vehicles available for the passenger
 
 
 import warnings
