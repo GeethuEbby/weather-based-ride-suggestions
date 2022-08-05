@@ -28,6 +28,14 @@ The project is using the following version of Python interpreter.
 ````
 	3.9.7 (default, Sep 16 2021, 16:59:28) [MSC v.1916 64 bit (AMD64)]
 ````
+Inorder to create the profile for travellers and vehicles, we need to use names module.
+````
+pip install names
+````
+Folium module is use to represent locations on the maps.
+````
+pip install folium
+````
 Install dash to bind user interface to the code. In the terminal, run the following code for installation.
 ````
 pip install plotly
@@ -36,6 +44,7 @@ pip install dash			# (In case of version issues, use pip install dash –upgrade
 pip install dash-leaflet		# for interactive maps
 pip install dash-extensions 		# for interactive maps
 pip install dash-bootstrap-components 	# Bootstrap components for consistently styled apps with complex, responsive layouts
+pip install dash-auth 			# for user authentication
 ````
 Install ipynb to allow to import ipynb modules, run the following code for installation.
 ````
