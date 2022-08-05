@@ -263,11 +263,11 @@ def third_nearest(data, v):
 $\ hav(c) = hav(a-b) + sin(a) sin(b) hav(C) $
 
 -	Also, the second nearest and third nearest distances are calculated by using the same formula and sorting the results to get the second and third minimums.
--	Now variables are created with data to be passed to dashboard.
+-	Dashboard elements are defined and style and UI components are added.
 -	Map with marker location of the passenger and vehicle identified is prepared and saved as html to be displayed as iFrame in dashboard.
--	The vehicles are identified using the function defined in prepare_map.ipynb and function name is map_html().
--	Dashboard is created using dash Plotly library. 
+-	The map is constructed using the function defined in prepare_map.ipynb and function name is map_html().
 -	External stylesheets for the dash are imported to apply styling.
+-	Dashboard is created using dash Plotly library. 
 -	The dashboard is initialized and dependencies are added with the below code
 ````
 app = Dash(__name__, external_stylesheets=[external_stylesheets,dbc.themes.BOOTSTRAP, 
@@ -289,15 +289,15 @@ if __name__ == '__main__':
 ````
 -	Visit http://127.0.0.1:8050/ in your web browser to view the dashboard.
 
-## Dashboard UI Components
+## Dashboard User Interface
 
 #### Login Page
 
 ![Login_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Login_Page.png)
 
 - User can enter username and password to login to the dashboard. User must be authenticated to access their dashboard.
-- Credentials for Mary Jane - mary/mary
-- Credentials for Alex Doe - alex/alex
+- Credentials for Mary Jane - ***mary/mary***
+- Credentials for Alex Doe - ***alex/alex***
 
 #### Home Page
 
