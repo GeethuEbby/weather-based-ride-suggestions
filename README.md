@@ -11,7 +11,7 @@ With the advancement of technology, it is possible to forecast weather almost ac
 The objective of Mobility Recommendation – Dashboard is to generate a dashboard for a traveller. He can access weekly weather information, see any notifications arising due to inclement weather, choose vehicle recommendations and pre-book a vehicle for the day, see profile information and can access a vehicle scheduler. Vehicles are recommended for days of inclement weather and based on the passenger’s fuel preference.
 
 ## Experimental Set Up:
-For development purpose, we consider traveller profiles for two users Alex and Mary, whose preferred travel mode is ebike and fuel preference is either electric or petrol/diesel vehicle. Vehicle profiles are also generated, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
+For development purpose, we consider traveller profiles for two users Alex and Mary, whose preferred travel mode is ebike and fuel preference is electric or petrol/diesel vehicle respectively. Vehicle profiles are also generated, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
 
 ## Data Flow Diagram
 ![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/d64740ba70ef928a8ebb8141fe379729e0257c8e/Data%20Flow.jpg)
