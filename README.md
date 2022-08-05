@@ -6,6 +6,8 @@ Modern consumers need modern solutions. This project attempts to utilize the wea
 
 ## Problem Statement:
 
+With the advancement of technology, it is possible to forecast weather almost accurately. By taking advantage of this scenario, we should be able to assist daily commuters to conveniently schedule their travels in advance.
+
 The objective of Mobility Recommendation – Dashboard is to generate a dashboard for a traveller. He can access weekly weather information, see any notifications arising due to inclement weather, choose vehicle recommendations and pre-book a vehicle for the day, see profile information and can access a vehicle scheduler. Vehicles are recommended for days of inclement weather and based on the passenger’s fuel preference.
 
 ## Experimental Set Up:
