@@ -99,6 +99,77 @@ The following variables are used to store the dataset.
 -	fcdgeoTime_df -> most.fcdgeoTime.csv
 -	weather_df -> WeeklyWeather.csv
 
+The columns and decriptions are given below:
+
+**most_edges.csv**
+
+| Column | Dtype | Description |
+| --- | --- | --- |
+|edgeID | object | Edge ID column |
+|laneID | object | Lane ID column |
+|lon | float64 | Longitude |
+|lat | float64 | Latitude |
+
+**most.emissionTime.csv**
+
+| Column | Dtype | Description |
+| --- | --- | --- |
+|timestep_time | float64 | Time step ID |
+|vehicle_CO | float64 | CO Emission of the vehicle |
+|vehicle_CO2 | float64 | CO2 Emission of the vehicle |
+|vehicle_NOx | float64 | Nitrogen Emission of the vehicle |
+|vehicle_PMx | float64 | Particulate Matter Emission of the vehicle |
+|vehicle_angle | float64 | Vehicle Angle |
+|vehicle_eclass | object | Vehicle class |
+|vehicle_electricity | float64 | Electric vehicle 1/0 |
+|vehicle_fuel | float64 | Vehicle fuel |
+|vehicle_id | object | ID |
+|vehicle_lane | object | Lane ID |
+|vehicle_noise | float64 | Noise level |
+|vehicle_pos | float64 | Position |
+|vehicle_route | object | Route detail |
+|vehicle_speed | float64 | Speed of vehicle at the timestep |
+|vehicle_type | object | Vehicle Type |
+|vehicle_waiting | float64 | Waiting 1/0 |
+|vehicle_x | float64 | x-pos |
+|vehicle_y | float64 | y-pos |
+
+**most.fcdgeoTime.csv**
+
+| Column | Dtype | Description |
+| --- | --- | --- |
+|timestep_time | float64 | Time step ID |
+|vehicle_angle | float64 | Vehicle Angle |
+|vehicle_distance | float64 | Vehicle distance |
+|vehicle_id | object |Vehicle ID |
+|vehicle_lane | object | Lane ID |
+|vehicle_pos | float64 | Position |
+|vehicle_slope | float64 | Slope |
+|vehicle_speed | float64 | Speed of vehicle at the timestep |
+|vehicle_type | object | Vehicle Type |
+|vehicle_x | float64 | x-pos |
+|vehicle_y | float64 | y-pos |
+|vehicle_z | float64 | z-pos |
+|person_angle | float64 | Person Angle |
+|person_edge | float64 | Person edge |
+|person_id | object | Person ID |
+|person_pos | float64 |Person Position |
+|person_slope | float64 |Person Slope |
+|person_speed | float64 | Speed of person at the timestep |
+|person_x | float64 | x-pos |
+|person_y | float64 | y-pos |
+|person_z | float64 | z-pos |
+|Time_of_Day | object | Time of Day |
+
+**WeeklyWeather.csv**
+
+| Column | Dtype | Description |
+| --- | --- | --- |
+|Weekday | object | Day of the week |
+|Date | object | Date |
+|Temp | int64  | Forecasted temperature for the hour |
+|Weather | object |Forecasted weather for the hour |
+
 
 ## Data Cleaning:
 It is very important to clean and format the data before proceeding any further. After using pandas library to read the csv files, the datasets are formatted as below.
