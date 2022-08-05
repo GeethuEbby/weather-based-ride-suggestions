@@ -14,7 +14,7 @@ The objective of Mobility Recommendation – Dashboard is to generate a dashboar
 For development purpose, we consider traveller profiles for two users Alex and Mary, whose preferred travel mode is ebike and fuel preference is electric or petrol/diesel vehicle respectively. Vehicle profiles are also generated, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
 
 ## Data Flow Diagram
-![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/d64740ba70ef928a8ebb8141fe379729e0257c8e/Data%20Flow.jpg)
+![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/3abc5ba4cb348f6f258cdf44b51a29dccac5b185/Data%20Flow.jpg)
 
 
 The data that we have is huge and inorder to make an efficient system, we need to narrow down our region of interest. Rather than taking the whole data set into consideration, we split the data into clusters. The geo-locations data is clustered using k-means clustering algorithm. This is then merged with vehicle data and traveller data inorder to obtain the vehicles and travellers in cluster 1. We are considering Cluster 1 as our region of interest.
