@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_12675c6e47b737732cde22bc4323d176 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+            </style>
+        
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_12675c6e47b737732cde22bc4323d176" ></div>
+        
+</body>
+<script>    
+    
+            var map_12675c6e47b737732cde22bc4323d176 = L.map(
+                "map_12675c6e47b737732cde22bc4323d176",
+                {
+                    center: [43.730638, 7.363178],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 15,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_efb83c31d45de076aea76b4158a8d57a = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_12675c6e47b737732cde22bc4323d176);
+        
+    
+            var marker_64d33e8f4be895f17a52e873c3f00824 = L.marker(
+                [43.730638, 7.363178],
+                {}
+            ).addTo(map_12675c6e47b737732cde22bc4323d176);
+        
+    
+            var icon_8c930bbaa9dcf843a22517c9294e21e5 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "glyphicon-user", "iconColor": "lightblue", "markerColor": "blue", "prefix": "glyphicon"}
+            );
+            marker_64d33e8f4be895f17a52e873c3f00824.setIcon(icon_8c930bbaa9dcf843a22517c9294e21e5);
+        
+    
+        var popup_3902c9dc9a47c727c95fb43ae83e8f48 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_f3a446403985d3a75f1446e92f94c7a2 = $(`<div id="html_f3a446403985d3a75f1446e92f94c7a2" style="width: 100.0%; height: 100.0%;">Mary Jane</div>`)[0];
+            popup_3902c9dc9a47c727c95fb43ae83e8f48.setContent(html_f3a446403985d3a75f1446e92f94c7a2);
+        
+
+        marker_64d33e8f4be895f17a52e873c3f00824.bindPopup(popup_3902c9dc9a47c727c95fb43ae83e8f48)
+        ;
+
+        
+    
+    
+            var marker_51014510e8a8cb013f304972cba63f5c = L.marker(
+                [43.73223404434539, 7.382843297285843],
+                {}
+            ).addTo(map_12675c6e47b737732cde22bc4323d176);
+        
+    
+            var icon_eae786163a792e12296ce9fee394dd11 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "car", "iconColor": "lightblue", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_51014510e8a8cb013f304972cba63f5c.setIcon(icon_eae786163a792e12296ce9fee394dd11);
+        
+    
+        var popup_e1dafe84ffc3cc95155154edf1461ac3 = L.popup({"maxWidth": "100%"});
+
+        
+            var html_c065da7f68bb9967c4f1bd86b4244c81 = $(`<div id="html_c065da7f68bb9967c4f1bd86b4244c81" style="width: 100.0%; height: 100.0%;">Richard Corriveau---uber---electric</div>`)[0];
+            popup_e1dafe84ffc3cc95155154edf1461ac3.setContent(html_c065da7f68bb9967c4f1bd86b4244c81);
+        
+
+        marker_51014510e8a8cb013f304972cba63f5c.bindPopup(popup_e1dafe84ffc3cc95155154edf1461ac3)
+        ;
+
+        
+    
+    
+            var marker_e72410c79143ce66b949726bb84d4382 = L.marker(
+                [43.73223404434539, 7.382843297285843],
+                {}
+            ).addTo(map_12675c6e47b737732cde22bc4323d176);
+        
+    
+            var icon_2044f256db526c07a885ddc873673dd8 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "car", "iconColor": "lightblue", "markerColor": "red", "prefix": "fa"}
+            );
+            marker_e72410c79143ce66b949726bb84d4382.setIcon(icon_2044f256db526c07a885ddc873673dd8);
+        
+    
+        var popup_2ad9f485d953f6d476500f90b76b312c = L.popup({"maxWidth": "100%"});
+
+        
+            var html_16c0e37d3a20c9542555aaf63b1b9f20 = $(`<div id="html_16c0e37d3a20c9542555aaf63b1b9f20" style="width: 100.0%; height: 100.0%;">Amanda Fisher---uber---electric</div>`)[0];
+            popup_2ad9f485d953f6d476500f90b76b312c.setContent(html_16c0e37d3a20c9542555aaf63b1b9f20);
+        
+
+        marker_e72410c79143ce66b949726bb84d4382.bindPopup(popup_2ad9f485d953f6d476500f90b76b312c)
+        ;
+
+        
+    
+    
+            var circle_marker_da26a82122839a7ade9e3bb5e56ebcdf = L.circleMarker(
+                [43.730638, 7.363178],
+                {"bubblingMouseEvents": true, "color": "#3388ff", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "opacity": 1.0, "radius": 100, "stroke": true, "weight": 3}
+            ).addTo(map_12675c6e47b737732cde22bc4323d176);
+        
+</script>
