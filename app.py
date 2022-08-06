@@ -30,7 +30,6 @@
 # In[1]:
 
 
-# Importing libraries
 import pandas as pd
 import numpy as np
 import random as r
@@ -50,240 +49,38 @@ import plotly.express as px
 from dash.dependencies import Input, Output, State
 
 from loc_clustering import cluster_fn
-import ipynb.fs
-#from defs.loc_clustering import cluster_fn # for clustering locations based on geo code
-#from defs.rain_alert_fn import rainy_days # function for checking inclement weather days
-#from defs.prepare_map import map_html # function for building the map for dashboard
-#from defs.vehicle_recommendation import veh_rec # function for finding the closest vehicles available for the passenger
-
+from rain_alert_fn import rainy_days # function for checking inclement weather days
+from prepare_map import map_html # function for building the map for dashboard
+from vehicle_recommendation import veh_rec # function for finding the closest vehicles available for the passenger
 
 import warnings
 warnings.filterwarnings("ignore")
 
 
-# ###### Reading Datasets
+# ###### Processed Dataset
 
 # In[2]:
 
 
-# Loading csv file
-pd.set_option('display.max_columns', 35)
-# File contains information to geo locate the lanes and edges
 edges_df = pd.read_csv('Most_edges.csv', index_col=0) 
-# File contains information for all vehicles by lane, logged per hour by each minute
-emission_df = pd.read_csv('most.emissionTime.csv', index_col=0) 
-# File contains information about vehicle and pedestrain way points
-fcdgeoTime_df = pd.read_csv('most.fcdgeoTime.csv', index_col=0)
 
-
-# ###### Cleaning Dataset
 
 # In[3]:
 
 
-#Convert Time_of_Day column to a datetime format
-emission_df['Time_of_Day'] =  pd.to_datetime(emission_df['Time_of_Day'])
-fcdgeoTime_df['Time_of_Day'] =  pd.to_datetime(fcdgeoTime_df['Time_of_Day'])
-
-# Split time to hours, minutes and seconds. 
-# Date is bot extracted as data is recorded for '2021-08-29'
-emission_df['hour_col'] = emission_df['Time_of_Day'].dt.hour
-emission_df['min_col'] = emission_df['Time_of_Day'].dt.minute
-emission_df['sec_col'] = emission_df['Time_of_Day'].dt.second
-
-fcdgeoTime_df['hour_col'] = fcdgeoTime_df['Time_of_Day'].dt.hour
-fcdgeoTime_df['min_col'] = fcdgeoTime_df['Time_of_Day'].dt.minute
-fcdgeoTime_df['sec_col'] = fcdgeoTime_df['Time_of_Day'].dt.second
-
-#Convert datatypes
-emission_df = emission_df.astype({"timestep_time": np.int64, "vehicle_electricity": bool,
-                                 "hour_col": np.int64,"min_col": np.int64,
-                                 "sec_col": np.int64})
-fcdgeoTime_df = fcdgeoTime_df.astype({"timestep_time": np.int64,
-                                 "hour_col": np.int64,"min_col": np.int64,
-                                 "sec_col": np.int64})
-
-
-# rename column so as to merge dataframes, and keep column names consistent
-emission_df.rename(columns = {'vehicle_lane':'laneID'}, inplace = True)
-fcdgeoTime_df.rename(columns = {'vehicle_lane':'laneID'}, inplace = True)
-
-#convert letter to lower case
-emission_df = emission_df.apply(lambda x: x.str.lower() if x.dtype=='object' else x)
-fcdgeoTime_df = fcdgeoTime_df.apply(lambda x: x.str.lower() if x.dtype=='object' else x)
-#Removing column since there is value is only False
-emission_df.drop(emission_df[emission_df.columns[pd.Series(emission_df.columns).str.startswith('vehicle_electricity')]], axis=1, inplace=True)
+pedestrian_preference = pd.read_csv('pedestrian_preference.csv', index_col=0) 
+ebike_travellers = pedestrian_preference.loc[pedestrian_preference['travel_mode'] == 'ebike']
 
 
 # In[4]:
 
 
-#Clean up the column values across CSVs by removing special characters
-edges_df['edgeID'] = edges_df['edgeID'].str.replace(':','')
-edges_df['laneID'] = edges_df['laneID'].str.replace(':','')
-edges_df['edgeID'] = edges_df['edgeID'].str.replace('#','_')
-edges_df['laneID'] = edges_df['laneID'].str.replace('#','_')
-
-emission_df['laneID'] = emission_df['laneID'].str.replace(':','')
-emission_df['laneID'] = emission_df['laneID'].str.replace('#','_')
-emission_df['laneID'] = emission_df['laneID'].str.replace('-','')
-
-fcdgeoTime_df['laneID'] = fcdgeoTime_df['laneID'].str.replace(':','')
-fcdgeoTime_df['laneID'] = fcdgeoTime_df['laneID'].str.replace('#','_')
-fcdgeoTime_df['laneID'] = fcdgeoTime_df['laneID'].str.replace('-','')
-
-fcdgeoTime_df['person_edge'] = fcdgeoTime_df['person_edge'].str.replace(':','')
-fcdgeoTime_df['person_edge'] = fcdgeoTime_df['person_edge'].str.replace('#','_')
-fcdgeoTime_df['person_edge'] = fcdgeoTime_df['person_edge'].str.replace('-','')
-
-emission_df['vehicle_route'] = emission_df['vehicle_route'].str.replace('!italy:france','italy:france')
-emission_df['vehicle_route'] = emission_df['vehicle_route'].str.replace('!var#','.')
-fcdgeoTime_df['time_col'] = fcdgeoTime_df['Time_of_Day'].dt.time
-
-
-# ###### Cluster the Dataset
-
-# In[5]:
-
-
-# Create a subset of edges_df so as to cluster lanes and plot on map
-edges_subset_df = edges_df.loc[:,['laneID','lat','lon']]
-# Using cluster function in loc_clustering notebook to allocate cluster number to geolocations
-# edges_subset, column_beginning_index, column_end_index and k-value are passed to the function
-# function returns dataframe with cluster value as new column
-edges_subset_df = cluster_fn(edges_subset_df,1,3,7)
-
-
-# In[6]:
-
-
-clustered_edges_df = pd.merge(edges_df, edges_subset_df, on=['laneID', 'lat','lon'], how='outer')
-
-
-# In[7]:
-
-
-#Creating a sub-set dataframe -> Considering Cluster = 1
-cluster1_df = clustered_edges_df[clustered_edges_df['cluster_label'].isin([1])]
-# Subset without duplicates for cluster 1
-cluster1_ss_df = cluster1_df.drop_duplicates(subset=['laneID'])
-
-
-# In[8]:
-
-
-# Subset without duplicates for cluster 1
-#cluster1_df = cluster1_df.drop_duplicates(subset=['laneID'])
-# Merge with all the IDs that match in both the Dataframe
-cluster1_vehicle_df = pd.merge(emission_df, cluster1_ss_df, on="laneID", how="inner")
-
-
-# In[9]:
-
-
-#vehicle_type = 0 are Pedestrians
-fcdgeoTime_df['vehicle_type'].replace(['0'],['pedestrian'], inplace=True)
-#Subset dataframe filtered as pedestrian
-pedestrian_fc_df = fcdgeoTime_df[fcdgeoTime_df['vehicle_type']=='pedestrian']
-
-
-# In[10]:
-
-
-# Remove all columns between column index 1 to 12, as they donot contain any information relevant to pedestrians
-# vehicle_angle	vehicle_distance	vehicle_id	laneID	vehicle_pos	vehicle_slope	vehicle_speed	
-# vehicle_type	vehicle_x	vehicle_y	vehicle_z
-pedestrian_fc_df.drop(pedestrian_fc_df.iloc[:, 1:12], inplace = True, axis = 1)
-
-
-# In[11]:
-
-
-pedestrian_fc_df.rename(columns = {'person_edge':'edgeID'}, inplace = True)
-
-
-# In[12]:
-
-
-# Merge with all the IDs that match in both the Dataframe
-pedest_fchr_df = pd.merge(pedestrian_fc_df, cluster1_ss_df, on="edgeID", how="inner")
-
-
-# In[13]:
-
-
-pedst_subset = pedest_fchr_df.groupby('person_id', as_index=False).first()
-pedst_subset = pedst_subset.sort_values(by="Time_of_Day")
-peds_list = pedst_subset['person_id'].tolist()
-pedst_subset = pedest_fchr_df[pedest_fchr_df['person_id'].isin(peds_list[:3])]
-edges_list = pedst_subset['edgeID'].unique().tolist()
-edges1a_df = edges_df[edges_df['edgeID'].isin(edges_list)]
-lanes_list = edges1a_df['laneID'].unique().tolist()
-vehicle_cluster_df = cluster1_vehicle_df[cluster1_vehicle_df['laneID'].isin(lanes_list)]
-# 'bus','hw_coach','coach','taxi','uber'
-vehiclegeo_subsetdf = vehicle_cluster_df[vehicle_cluster_df['vehicle_type'].isin(['bus','hw_coach','coach','taxi','uber']) ]
-
-
-# ###### Creating Profile - Traveller
-
-# In[14]:
-
-
-# Pedestrian profile is created.
-pedestrian_info_df = pd.DataFrame(peds_list)
-pedestrian_info_df.rename(columns = {0:'person_id'}, inplace = True)
-pedestrian_preference = pedst_subset[['person_id','person_x','person_y','edgeID','laneID','cluster_label']]
-pedestrian_preference = pedestrian_preference.groupby("person_id").first()
-pedestrian_info_df = pedestrian_info_df.groupby("person_id").first()
-pedestrian_preference = pd.merge(pedestrian_preference, pedestrian_info_df, on="person_id", how="inner")
-pedestrian_preference = pedestrian_preference.head(2)
-pedestrian_preference = pedestrian_preference.assign(traveller_name=["Mary Jane","Alex Joe"],
-                             fuel_preference=["electric","petrol/diesel"],
-                            travel_mode = ["ebike","ebike"])
-
-
-# ###### Creating Profile - Vehicle
-
-# In[15]:
-
-
-#Creating the vehicle profile
-ebike_travellers = pedestrian_preference.loc[pedestrian_preference['travel_mode'] == 'ebike']
-edges_list = ebike_travellers['edgeID'].unique().tolist()
-edges1a_df = edges_df[edges_df['edgeID'].isin(edges_list)]
-lanes_list = edges1a_df['laneID'].unique().tolist()
-vehicle_df = cluster1_vehicle_df[cluster1_vehicle_df['laneID'].isin(lanes_list)]
-
-veh_ = vehicle_cluster_df[vehicle_cluster_df['vehicle_type'].isin(['taxi','uber']) ]
-veh_ = veh_.groupby("vehicle_id").first()
-veh_ = veh_.reset_index()
-veh_ = veh_[['vehicle_id','vehicle_eclass','vehicle_fuel','laneID','vehicle_type','vehicle_x','vehicle_y','edgeID','lon','lat','cluster_label']]
-fuel_type = ["electric","petrol","diesel" ]
-
-phnum = []
-count = 0
-while (count < veh_.shape[0]):   
-    count = count + 1
-    ph_no = 902
-    for i in range(1, 8):
-        a = r.randint(0, 9)
-        ph_no = str(ph_no) + str(a)
-    phnum.append(ph_no)
-
-driver_name = []
-count = 0
-while (count < veh_.shape[0]):
-    count = count + 1
-    driver_name.append(names.get_full_name())
-    
-veh_["fuel_type"] = np.random.choice(fuel_type, len(veh_))
-veh_["phnum"] = np.random.choice(phnum, len(veh_))
-veh_["driver_name"] = np.random.choice(driver_name, len(veh_))
+veh_ = pd.read_csv('veh_.csv', index_col=0) 
 
 
 # ###### Weather Info - Identifying Inclement Weather
 
-# In[16]:
+# In[5]:
 
 
 #Invoking function to identify the days with inclement weather.
@@ -294,7 +91,7 @@ rainy_days,wkday,temptre,wkdate = rainy_days()
 
 # ###### Identifying the closest vehicles
 
-# In[17]:
+# In[6]:
 
 
 # Identifiying the closest vehicles to the pedestrian
@@ -302,7 +99,7 @@ rainy_days,wkday,temptre,wkdate = rainy_days()
 electric_veh,gas_veh,p_points,p_name = veh_rec(ebike_travellers,veh_,rainy_days)
 
 
-# In[18]:
+# In[7]:
 
 
 # Subset of dataframe to be passed to dashboard
@@ -311,7 +108,7 @@ electric_veh = electric_veh[['driver_name','phnum','vehicle_type','fuel_type']]
 electric_veh = electric_veh.rename({'driver_name': 'Driver', 'phnum': 'Phone Number', 'vehicle_type': 'Type', 'fuel_type': 'Fuel'}, axis=1)  # new method
 
 
-# In[19]:
+# In[8]:
 
 
 # Subset of dataframe to be passed to dashboard
@@ -320,7 +117,7 @@ gas_veh = gas_veh[['driver_name','phnum','vehicle_type','fuel_type']]
 gas_veh = gas_veh.rename({'driver_name': 'Driver', 'phnum': 'Phone Number', 'vehicle_type': 'Type', 'fuel_type': 'Fuel'}, axis=1)  # new method
 
 
-# In[20]:
+# In[9]:
 
 
 lat = p_points[0][0]
@@ -330,7 +127,7 @@ fuel_type = 'electric'
 map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0]) # Map for Mary - who prefer electric
 
 
-# In[21]:
+# In[10]:
 
 
 lat = p_points[1][0]
@@ -342,7 +139,7 @@ map_html(lat,lng,electric_veh_subset,fuel_type,p_name[1][0]) # Map for Alex - wh
 
 # ### Initializing dashboard
 
-# In[22]:
+# In[11]:
 
 
 # Initializing dashboard
@@ -353,7 +150,7 @@ server = app.server
 
 # ##### Styling dashboard components
 
-# In[23]:
+# In[12]:
 
 
 # Dashboard style variables
@@ -419,7 +216,7 @@ style_data_conditional = [
 
 # ###### Login Page
 
-# In[24]:
+# In[13]:
 
 
 # Login Page for any user - User Name, Password & Login Button
@@ -459,7 +256,7 @@ html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left":
 
 # ###### Navigation Bar
 
-# In[25]:
+# In[14]:
 
 
 #Dashboard layout components - nav bar for Mary
@@ -498,7 +295,7 @@ style=SIDEBAR_STYLE,
 )
 
 
-# In[26]:
+# In[15]:
 
 
 #Dashboard layout components - nav bar for Alex
@@ -539,7 +336,7 @@ style=SIDEBAR_STYLE,
 
 # ###### Logout Button
 
-# In[27]:
+# In[16]:
 
 
 # Logout Button acessible across the pages, once user logs in
@@ -548,7 +345,7 @@ logout_btn = dcc.Link('Log out', href='/',style=BUTTON_STYLE)
 
 # ###### Weather cards - Home Page
 
-# In[28]:
+# In[17]:
 
 
 # Weather cards to be displayed on Home page, once user logs in
@@ -759,7 +556,7 @@ weather_cards = dbc.Row(
 
 # ###### Home Page
 
-# In[29]:
+# In[18]:
 
 
 # Home Page for Mary - Prefers electric Vehicle
@@ -778,7 +575,7 @@ home_page_2 = html.Div([weather_cards,
 
 # ###### Notification Page
 
-# In[30]:
+# In[19]:
 
 
 # Notification tab content for Mary
@@ -820,7 +617,7 @@ dbc.Alert(
 
 # ###### Notification Page
 
-# In[31]:
+# In[20]:
 
 
 # Notification tab content for Alex
@@ -860,7 +657,7 @@ dbc.Alert(
 ], style=CONTENT_STYLE) 
 
 
-# In[32]:
+# In[21]:
 
 
 #When there is no Notification
@@ -879,7 +676,7 @@ no_notification_pg = html.Div(
 
 # ###### Call Backs for Notification page
 
-# In[33]:
+# In[22]:
 
 
 # To highlight the row that is selected in the table of recommended vehicles
@@ -900,7 +697,7 @@ def update_selected_row_color(active):
     return style
 
 
-# In[34]:
+# In[23]:
 
 
 # To show a modal confirmation box for booking conformation on Notification Page
@@ -915,7 +712,7 @@ def toggle_modal(n1, n2, is_open):
     return is_open
 
 
-# In[35]:
+# In[24]:
 
 
 # To display selected Driver on Notification Page
@@ -926,7 +723,7 @@ def update_graphs(active_cell):
 
 # ###### Schedule Table Layout
 
-# In[36]:
+# In[25]:
 
 
 #Scheduler table structure for Profile Page
@@ -947,7 +744,7 @@ table_body = [html.Tbody([row1, row2, row3, row4, row5, row6, row7])]
 
 # ###### Profile page layout
 
-# In[37]:
+# In[26]:
 
 
 # Profile page for Mary
@@ -1071,7 +868,7 @@ profile_form_1 = html.Div(
                 ], style=CONTENT_STYLE)
 
 
-# In[38]:
+# In[27]:
 
 
 # Profile page for Alex
@@ -1197,7 +994,7 @@ profile_form_2 = html.Div(
 
 # ###### Defining Page layout
 
-# In[39]:
+# In[28]:
 
 
 #Defining the Page layouts
@@ -1212,7 +1009,7 @@ app.layout = html.Div([
 
 # ###### Login Page and Naviagtion Call Backs
 
-# In[40]:
+# In[29]:
 
 
 # Login Page Call Back
@@ -1279,7 +1076,7 @@ def display_page(pathname):
 
 # ### Dashboard Initialized
 
-# In[41]:
+# In[ ]:
 
 
 # Initializing the dashboard.Dashboard can be accessed by clicking the URL in the output < http://127.0.0.1:8050/ >
