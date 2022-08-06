@@ -1,0 +1,3 @@
+person_id,person_x,person_y,edgeID,laneID,cluster_label,traveller_name,fuel_preference,travel_mode
+pedestrian_2-1_3980,7.451035,43.764938,153485_2,153485_2_0,1,Mary Jane,electric,ebike
+pedestrian_2-1_4346,7.454549,43.761802,153359_1,153359_1_0,1,Alex Joe,petrol/diesel,ebike
