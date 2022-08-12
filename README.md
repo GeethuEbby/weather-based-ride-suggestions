@@ -14,7 +14,7 @@ The objective of Mobility Recommendation – Dashboard is to generate a dashboar
 For development purpose, we consider traveller profiles for two users Alex and Mary, whose preferred travel mode is ebike and fuel preference is electric or petrol/diesel vehicle respectively. Vehicle profiles are also generated, and driver details with contact info are added for each vehicle. Vehicles in the traveller cluster are identified and taxis or Ubers are filtered from it. 
 
 ## Data Flow Diagram
-![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/3abc5ba4cb348f6f258cdf44b51a29dccac5b185/Data%20Flow.jpg)
+![Data Flow Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Data%20Flow.jpg)
 
 
 The data that we have is huge and inorder to make an efficient system, we need to narrow down our region of interest. Rather than taking the whole data set into consideration, we split the data into clusters. The geo-locations data is clustered using k-means clustering algorithm. This is then merged with vehicle data and traveller data inorder to obtain the vehicles and travellers in cluster 1. We are considering Cluster 1 as our region of interest.
@@ -293,7 +293,7 @@ if __name__ == '__main__':
 
 #### Login Page
 
-![Login_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Login_Page.png)
+![Login_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Login_Page.png)
 
 - User can enter username and password to login to the dashboard. User must be authenticated to access their dashboard.
 - Credentials for Mary Jane - ***mary/mary***
@@ -301,14 +301,14 @@ if __name__ == '__main__':
 
 #### Home Page
 
-![Home_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/7c08a81115749bc68c7caf10f3ae2d822cd6940e/Home_Pg.jpg)
+![Home_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Home_Pg.jpg)
 
 -	Weather cards displaying day of the week, date and expected mean weather for the day.
 -	Map showing location of the logged in traveller (blue marker) and closest vehicles (red markers).
 
 #### Notifications 
 
-![Notification_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Notification_Pg.jpg)
+![Notification_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Notification_Pg.jpg)
 
 -	Navigation bar shows badge if there is a notification.
 -	Warning displays day when inclement weather is expected.
@@ -316,14 +316,14 @@ if __name__ == '__main__':
 
 #### Booking a Ride
 
-![Booking_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Notification_Confirm_Pg.jpg)
+![Booking_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Notification_Confirm_Pg.jpg)
 
 -	Click on a row to choose a ride.
 -	Click on ‘Book’ button to confirm the ride.
 
 #### Profile
 
-![Profile_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/29b05da91777c0b4c05f236cbf93ae9fd29aad52/Profile_Pg.jpg)
+![Profile_Page](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/Profile_Pg.jpg)
 
 -	User account information
 -	User vehicle scheduler
@@ -332,7 +332,7 @@ if __name__ == '__main__':
 
 ##### How to Book a Ride
 
-![UseCase](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/63e23df1b34c6d16b6f81ce33b698b77e29771fb/UseCase.jpg)
+![UseCase](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/da626109922fe803b8cc98d429d6d532069abc94/assets/UseCase.jpg)
 
 -	The traveller accesses the dashboard via URL *http://127.0.0.1:8050/*
 -	User logs into the application with username and password
