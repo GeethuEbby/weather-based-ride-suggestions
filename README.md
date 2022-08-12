@@ -188,7 +188,7 @@ With elbow method, k=7 is chosen and K means clustering is used to cluster. ‘c
 
 *The clustering function is defined in loc_clustering.ipynb and function name is cluster_fn()* 
 
-![Cluster Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/ef84b0f090e248679e2caa58b293395b09c938b8/Cluster.jpg)
+![Cluster Diagram](https://github.com/GeethuEbby/weather-based-ride-suggestions/blob/c651df19570c75c163f7b26d0b3c642fd2f1be93/assets/Cluster.jpg)
 
 For all further development purpose, cluster 1 is chosen as area of interest.
 The emission_df data frame (which contains the vehicle information) and fcdgeoTime_df data frame (which contains the traveller information) is merged and reassigned to new variables to based on laneId and edgeId, with clustered_edges_df. This is to get the cluster and location information for the vehicles and travellers.
