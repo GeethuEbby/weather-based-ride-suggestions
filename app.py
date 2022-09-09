@@ -728,7 +728,7 @@ def update_graphs(active_cell):
 
 #Scheduler table structure for Profile Page
 table_header = [
-    html.Thead(html.Tr([html.Th("Weekday"), html.Th("Preferred Vehicle")]))
+    html.Thead(html.Tr([html.Th("Weekday"), html.Th("Alternate Vehicle")]))
 ]
 
 row1 = html.Tr([html.Td("Sunday"), html.Td("Taxi")])
