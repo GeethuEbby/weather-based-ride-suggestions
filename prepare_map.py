@@ -8,34 +8,26 @@
 
 # Importing libraries
 import folium
-
+from folium.plugins import MarkerCluster
 
 # In[2]:
 
 
-def map_html(lat,lng,gas_veh_subset,fuel_type,p_name):
+def map_html(lat,lng,gas_veh_subset,fuel_type,p_name,dist):
     m = folium.Map(location=[lat, lng], zoom_start=15)
 
+    
+    marker_cluster = MarkerCluster().add_to(m)
+    for _, row in gas_veh_subset.iterrows():
+        folium.Marker(location=[row["lat"], row["lon"]],
+                      popup=row["driver_name"]+"---"+row["vehicle_type"]+"---"+row["fuel_type"], 
+                      icon= folium.Icon(icon="car",prefix="fa",color="red", icon_color='lightblue')).add_to(marker_cluster)
+
+    folium.Circle (location=[lat, lng], radius=dist, fill_color='blue').add_to(m)
     folium.Marker(location=[lat, lng],
                   popup=str(p_name),
                       icon= folium.Icon(icon="glyphicon-user",color="blue", icon_color='lightblue')).add_to(m)
 
-    for _, row in gas_veh_subset.iterrows():
-        folium.Marker(location=[row["lat"], row["lon"]],
-                      popup=row["driver_name"]+"---"+row["vehicle_type"]+"---"+row["fuel_type"], 
-                      icon= folium.Icon(icon="car",prefix="fa",color="red", icon_color='lightblue')).add_to(m)
-
-    folium.CircleMarker(location=[lat, lng],
-                            radius=100, fill_color='blue').add_to(m)
-
-
     m.save('maps/avail_'+fuel_type+'_veh.html')   
     return
     
-
-
-# In[ ]:
-
-
-
-
