@@ -96,7 +96,7 @@ rainy_days,wkday,temptre,wkdate = rainy_days()
 
 # Identifiying the closest vehicles to the pedestrian
 # Implemented using the haversine formula. It determines the great-circle distance between two points on a sphere given their longitudes and latitudes. 
-electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist = veh_rec(ebike_travellers,veh_,rainy_days)
+electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist,gas_veh_exclded,electric_veh_exclded = veh_rec(ebike_travellers,veh_,rainy_days)
 
 
 # In[7]:
@@ -124,7 +124,7 @@ lat = p_points[0][0]
 lng = p_points[0][1]
 fuel_type = 'electric' 
 
-map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0],electric_veh_dist) # Map for Mary - who prefer electric
+map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0],electric_veh_dist,electric_veh_exclded) # Map for Mary - who prefer electric
 
 
 # In[10]:
@@ -134,7 +134,7 @@ lat = p_points[1][0]
 lng = p_points[1][1]
 fuel_type = 'gas' 
 
-map_html(lat,lng,gas_veh_subset,fuel_type,p_name[1][0],gas_veh_dist) # Map for Alex - who prefer Petrol/Diesel
+map_html(lat,lng,gas_veh_subset,fuel_type,p_name[1][0],gas_veh_dist,gas_veh_exclded) # Map for Alex - who prefer Petrol/Diesel
 
 
 # ### Initializing dashboard
