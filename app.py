@@ -76,7 +76,7 @@ ebike_travellers = pedestrian_preference.loc[pedestrian_preference['travel_mode'
 
 
 veh_ = pd.read_csv('veh_.csv', index_col=0) 
-
+ex_vehicle_ = pd.read_csv('ex_vehicle_.csv', index_col=0) 
 
 # ###### Weather Info - Identifying Inclement Weather
 
@@ -124,7 +124,7 @@ lat = p_points[0][0]
 lng = p_points[0][1]
 fuel_type = 'electric' 
 
-map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0],electric_veh_dist,electric_veh_exclded) # Map for Mary - who prefer electric
+map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0],electric_veh_dist,ex_vehicle_) # Map for Mary - who prefer electric
 
 
 # In[10]:
@@ -134,7 +134,7 @@ lat = p_points[1][0]
 lng = p_points[1][1]
 fuel_type = 'gas' 
 
-map_html(lat,lng,gas_veh_subset,fuel_type,p_name[1][0],gas_veh_dist,gas_veh_exclded) # Map for Alex - who prefer Petrol/Diesel
+map_html(lat,lng,gas_veh_subset,fuel_type,p_name[1][0],gas_veh_dist,ex_vehicle_) # Map for Alex - who prefer Petrol/Diesel
 
 
 # ### Initializing dashboard
