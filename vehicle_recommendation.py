@@ -1,8 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[13]:
-
 
 import pandas as pd
 import math
