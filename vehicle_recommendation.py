@@ -34,6 +34,13 @@ def second_nearest(data, v):
     return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[1]
 def third_nearest(data, v):
     return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[2]
+def fourth_nearest(data, v):
+    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[3]
+def fifth_nearest(data, v):
+    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[4]
+def sixth_nearest(data, v):
+    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[6]
+
 
 def circle_rad(third_nearest_row,p_points_lat,p_points_lon):
     # approximate radius of earth in km
@@ -88,11 +95,12 @@ def veh_rec(ebike_travellers,veh_,rainy_days):
                     closest_row = closest(points, p_points)
                     second_nearest_row = second_nearest(points, p_points)
                     third_nearest_row = third_nearest(points, p_points)
+                    fourth_nearest_row = sixth_nearest(points, p_points)
                     traveller_name = (row.traveller_name)
                     fuel_ = (row.fuel_preference)
                     electric_veh_dist = circle_rad(third_nearest_row,p_points[0][0],p_points[0][1])
                     electric_veh = veh_.loc[((veh_['lat'] == closest_row[0])|(veh_['lat'] == second_nearest_row[0])| (veh_['lat'] == third_nearest_row[0]))& ((veh_['fuel_type'] == 'electric') )]
-                    
+                    electric_veh_exclded = veh_.loc[((veh_['lat'] == fourth_nearest_row[0])) & ((veh_['fuel_type'] == 'electric'))]
                 
                 elif (row.traveller_name == "Alex Joe"): 
                     p_points.append([row.person_y, row.person_x])
@@ -107,9 +115,11 @@ def veh_rec(ebike_travellers,veh_,rainy_days):
                     closest_row = closest(points, p_points)
                     second_nearest_row = second_nearest(points, p_points)
                     third_nearest_row = third_nearest(points, p_points)
+                    fourth_nearest_row = sixth_nearest(points, p_points)
                     traveller_name = (row.traveller_name)
                     fuel_ = (row.fuel_preference)
                     gas_veh = veh_.loc[((veh_['lat'] == closest_row[0])|(veh_['lat'] == second_nearest_row[0])| (veh_['lat'] == third_nearest_row[0])) & ((veh_['fuel_type'] == 'diesel') | (veh_['fuel_type'] == 'petrol'))]
+                    gas_veh_exclded = veh_.loc[((veh_['lat'] == fourth_nearest_row[0]))& ((veh_['fuel_type'] == 'diesel') | (veh_['fuel_type'] == 'petrol') )]
                     gas_veh_dist = circle_rad(third_nearest_row,p_points[1][0],p_points[1][1])
-    return electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist
+    return electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist,gas_veh_exclded,electric_veh_exclded
 
