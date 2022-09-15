@@ -14,7 +14,7 @@ from folium.plugins import MarkerCluster
 
 
 def map_html(lat,lng,gas_veh_subset,fuel_type,p_name,dist,ex_veh_set):
-    m = folium.Map(location=[lat, lng], zoom_start=10)
+    m = folium.Map(location=[lat, lng], zoom_start=13)
 
     
     marker_cluster = MarkerCluster().add_to(m)
