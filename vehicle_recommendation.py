@@ -12,12 +12,9 @@ from math import sin, atan2, radians
 
 # The distance() takes 2 set of latitude and logitude at a time and calculate the great-circle distance between the two points on a sphere. This is particularly used for navigation purposes.
 # The closest() takes the vehicles geo-cordinates as the first input and traveller's location as the second input. Now the distance() is invoked for each vehicle location against the passenger location, and the co-ordinate with the minimum disatnce is returned as output of the closest() function.
-# 
 # The second_nearest() takes the vehicles geo-cordinates as the first input and traveller's location as the second input. Now the distance() is invoked for each vehicle location against the passenger location. The distances are sorted and the second minimum is returned as output of the function.
-# 
 # The third_nearest() takes the vehicles geo-cordinates as the first input and traveller's location as the second input. Now the distance() is invoked for each vehicle location against the passenger location. The distances are sorted and the third minimum is returned as output of the function.
 
-# In[ ]:
 
 
 # Identifiying the closest vehicles to the pedestrian
@@ -34,39 +31,26 @@ def second_nearest(data, v):
     return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[1]
 def third_nearest(data, v):
     return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[2]
-def fourth_nearest(data, v):
-    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[3]
-def fifth_nearest(data, v):
-    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[4]
-def sixth_nearest(data, v):
-    return sorted(data, key=lambda p: distance(v[0][0],v[0][1],p[0],p[1]))[6]
 
-
+#Function to calculate the distnce between the person and the third nearest point
+#Used in drawing the cirlce on Folium map in meters
 def circle_rad(third_nearest_row,p_points_lat,p_points_lon):
     # approximate radius of earth in km
     R = 6373.0
-    #print(p_points[0])
-    #print(p_points[0])
-
     lat1 = radians(p_points_lat)
     lon1 = radians(p_points_lon)
     lat2 = radians(third_nearest_row[0])
     lon2 = radians(third_nearest_row[1])
-
     dlon = lon2 - lon1
     dlat = lat2 - lat1
-
     a = sin(dlat / 2)**2 + cos(lat1) * cos(lat2) * sin(dlon / 2)**2
     c = 2 * atan2(sqrt(a), sqrt(1 - a))
-
     distance = R * c * 1000
     return distance
 
 # The veh_rec() function takes two inputs. The dataframe with the details of the travellers whom we are building the dashboards for, the vehicle dataset that we have identified to be considered and the list of rainy days in the week.
 # The function checks if there is a rainy day in the week, if so, will proceed with excuting the followin steps.
 # For each individual traveller, the latitude and longitude are identified and stored in a variable. For each vehicle traveller, the latitude and longitude are identified and stored in a variable. These variables are passed to the closest() which returns the closest geo-cordinate of the available vehicle, second_nearest() which returns the second closest geo-cordinate of the available vehicle, third_nearest() which returns the third closest geo-cordinate of the available vehicle. Now based on these locations and the fuel preference, a subset of the vehicle dataframe is identified for each passenger. The function returns the identified vehicle subsets, passenger names and geo-cordinates of passenger.
-
-# In[15]:
 
 
 def veh_rec(ebike_travellers,veh_,rainy_days):
@@ -91,16 +75,13 @@ def veh_rec(ebike_travellers,veh_,rainy_days):
                             if (vrow.fuel_type == 'electric'):
                                 points.append([vrow.lat, vrow.lon])
                                 v_row_elec.append(vrow)
-                    print(vrow)
                     closest_row = closest(points, p_points)
                     second_nearest_row = second_nearest(points, p_points)
                     third_nearest_row = third_nearest(points, p_points)
-                    fourth_nearest_row = sixth_nearest(points, p_points)
                     traveller_name = (row.traveller_name)
                     fuel_ = (row.fuel_preference)
                     electric_veh_dist = circle_rad(third_nearest_row,p_points[0][0],p_points[0][1])
                     electric_veh = veh_.loc[((veh_['lat'] == closest_row[0])|(veh_['lat'] == second_nearest_row[0])| (veh_['lat'] == third_nearest_row[0]))& ((veh_['fuel_type'] == 'electric') )]
-                    electric_veh_exclded = veh_.loc[((veh_['lat'] == fourth_nearest_row[0])) & ((veh_['fuel_type'] == 'electric'))]
                 
                 elif (row.traveller_name == "Alex Joe"): 
                     p_points.append([row.person_y, row.person_x])
@@ -111,15 +92,12 @@ def veh_rec(ebike_travellers,veh_,rainy_days):
                             if ((vrow.fuel_type == 'diesel') | (vrow.fuel_type == 'petrol')):
                                 points.append([vrow.lat, vrow.lon])
                                 v_row_gas.append(vrow)
-                    #print(vrow)
                     closest_row = closest(points, p_points)
                     second_nearest_row = second_nearest(points, p_points)
                     third_nearest_row = third_nearest(points, p_points)
-                    fourth_nearest_row = sixth_nearest(points, p_points)
                     traveller_name = (row.traveller_name)
                     fuel_ = (row.fuel_preference)
                     gas_veh = veh_.loc[((veh_['lat'] == closest_row[0])|(veh_['lat'] == second_nearest_row[0])| (veh_['lat'] == third_nearest_row[0])) & ((veh_['fuel_type'] == 'diesel') | (veh_['fuel_type'] == 'petrol'))]
-                    gas_veh_exclded = veh_.loc[((veh_['lat'] == fourth_nearest_row[0]))& ((veh_['fuel_type'] == 'diesel') | (veh_['fuel_type'] == 'petrol') )]
                     gas_veh_dist = circle_rad(third_nearest_row,p_points[1][0],p_points[1][1])
-    return electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist,gas_veh_exclded,electric_veh_exclded
+    return electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist
 
