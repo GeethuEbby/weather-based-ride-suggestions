@@ -11,9 +11,6 @@ import pandas as pd
 import datetime
 
 
-# In[4]:
-
-
 #Creating a column to identify chance of rain
 def rain_(row):  
     if  'rain' in row['Weather']:
@@ -21,8 +18,6 @@ def rain_(row):
     else:
         return 0
 
-
-# In[5]:
 
 
 def rainy_days():
@@ -62,10 +57,6 @@ def rainy_days():
     #Create a list with rainy days of the week
     rainy_days = list(dict.fromkeys(rainy_days))   
     return rainy_days,wkday,temptre,wkdate
-
-
-# In[ ]:
-
 
 
 
