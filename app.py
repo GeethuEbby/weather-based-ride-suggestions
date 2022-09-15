@@ -59,29 +59,16 @@ warnings.filterwarnings("ignore")
 
 # ###### Processed Dataset
 
-# In[2]:
+
+edges_df = pd.read_csv('Most_edges.csv', index_col=0) #Geo locations
+pedestrian_preference = pd.read_csv('pedestrian_preference.csv', index_col=0)  #Pedestrian dataset
+ebike_travellers = pedestrian_preference.loc[pedestrian_preference['travel_mode'] == 'ebike']  #Pedestrian dataset
 
 
-edges_df = pd.read_csv('Most_edges.csv', index_col=0) 
-
-
-# In[3]:
-
-
-pedestrian_preference = pd.read_csv('pedestrian_preference.csv', index_col=0) 
-ebike_travellers = pedestrian_preference.loc[pedestrian_preference['travel_mode'] == 'ebike']
-
-
-# In[4]:
-
-
-veh_ = pd.read_csv('veh_.csv', index_col=0) 
-ex_vehicle_ = pd.read_csv('ex_vehicle_.csv', index_col=0) 
+veh_ = pd.read_csv('veh_.csv', index_col=0)  #Vehicle dataset to be considered for the passenger
+ex_vehicle_ = pd.read_csv('ex_vehicle_.csv', index_col=0) #Excluded vehicle dataset for map
 
 # ###### Weather Info - Identifying Inclement Weather
-
-# In[5]:
-
 
 #Invoking function to identify the days with inclement weather.
 # Function is defined in rain_alert_fn.ipynb
@@ -91,15 +78,9 @@ rainy_days,wkday,temptre,wkdate = rainy_days()
 
 # ###### Identifying the closest vehicles
 
-# In[6]:
-
-
 # Identifiying the closest vehicles to the pedestrian
 # Implemented using the haversine formula. It determines the great-circle distance between two points on a sphere given their longitudes and latitudes. 
-electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist,gas_veh_exclded,electric_veh_exclded = veh_rec(ebike_travellers,veh_,rainy_days)
-
-
-# In[7]:
+electric_veh,gas_veh,p_points,p_name,gas_veh_dist,electric_veh_dist = veh_rec(ebike_travellers,veh_,rainy_days)
 
 
 # Subset of dataframe to be passed to dashboard
@@ -108,8 +89,6 @@ electric_veh = electric_veh[['driver_name','phnum','vehicle_type','fuel_type']]
 electric_veh = electric_veh.rename({'driver_name': 'Driver', 'phnum': 'Phone Number', 'vehicle_type': 'Type', 'fuel_type': 'Fuel'}, axis=1)  # new method
 
 
-# In[8]:
-
 
 # Subset of dataframe to be passed to dashboard
 gas_veh_subset = gas_veh[['driver_name','phnum','vehicle_type','fuel_type','lat','lon']]
@@ -117,7 +96,6 @@ gas_veh = gas_veh[['driver_name','phnum','vehicle_type','fuel_type']]
 gas_veh = gas_veh.rename({'driver_name': 'Driver', 'phnum': 'Phone Number', 'vehicle_type': 'Type', 'fuel_type': 'Fuel'}, axis=1)  # new method
 
 
-# In[9]:
 
 
 lat = p_points[0][0]
@@ -127,7 +105,6 @@ fuel_type = 'electric'
 map_html(lat,lng,electric_veh_subset,fuel_type,p_name[0][0],electric_veh_dist,ex_vehicle_) # Map for Mary - who prefer electric
 
 
-# In[10]:
 
 
 lat = p_points[1][0]
@@ -139,7 +116,6 @@ map_html(lat,lng,gas_veh_subset,fuel_type,p_name[1][0],gas_veh_dist,ex_vehicle_)
 
 # ### Initializing dashboard
 
-# In[11]:
 
 
 # Initializing dashboard
@@ -150,7 +126,6 @@ server = app.server
 
 # ##### Styling dashboard components
 
-# In[12]:
 
 
 # Dashboard style variables
@@ -216,7 +191,6 @@ style_data_conditional = [
 
 # ###### Login Page
 
-# In[13]:
 
 
 # Login Page for any user - User Name, Password & Login Button
@@ -256,8 +230,6 @@ html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left":
 
 # ###### Navigation Bar
 
-# In[14]:
-
 
 #Dashboard layout components - nav bar for Mary
 sidebar_mary = html.Div(
@@ -295,7 +267,6 @@ style=SIDEBAR_STYLE,
 )
 
 
-# In[15]:
 
 
 #Dashboard layout components - nav bar for Alex
@@ -336,8 +307,6 @@ style=SIDEBAR_STYLE,
 
 # ###### Logout Button
 
-# In[16]:
-
 
 # Logout Button acessible across the pages, once user logs in
 logout_btn = dcc.Link('Log out', href='/',style=BUTTON_STYLE)
@@ -345,7 +314,6 @@ logout_btn = dcc.Link('Log out', href='/',style=BUTTON_STYLE)
 
 # ###### Weather cards - Home Page
 
-# In[17]:
 
 
 # Weather cards to be displayed on Home page, once user logs in
@@ -556,8 +524,6 @@ weather_cards = dbc.Row(
 
 # ###### Home Page
 
-# In[18]:
-
 
 # Home Page for Mary - Prefers electric Vehicle
 home_page_1 = html.Div([weather_cards,
@@ -575,7 +541,6 @@ home_page_2 = html.Div([weather_cards,
 
 # ###### Notification Page
 
-# In[19]:
 
 
 # Notification tab content for Mary
@@ -617,7 +582,6 @@ dbc.Alert(
 
 # ###### Notification Page
 
-# In[20]:
 
 
 # Notification tab content for Alex
@@ -657,7 +621,6 @@ dbc.Alert(
 ], style=CONTENT_STYLE) 
 
 
-# In[21]:
 
 
 #When there is no Notification
@@ -676,7 +639,6 @@ no_notification_pg = html.Div(
 
 # ###### Call Backs for Notification page
 
-# In[22]:
 
 
 # To highlight the row that is selected in the table of recommended vehicles
@@ -697,8 +659,6 @@ def update_selected_row_color(active):
     return style
 
 
-# In[23]:
-
 
 # To show a modal confirmation box for booking conformation on Notification Page
 @app.callback(
@@ -712,7 +672,6 @@ def toggle_modal(n1, n2, is_open):
     return is_open
 
 
-# In[24]:
 
 
 # To display selected Driver on Notification Page
@@ -723,7 +682,6 @@ def update_graphs(active_cell):
 
 # ###### Schedule Table Layout
 
-# In[25]:
 
 
 #Scheduler table structure for Profile Page
@@ -744,7 +702,7 @@ table_body = [html.Tbody([row1, row2, row3, row4, row5, row6, row7])]
 
 # ###### Profile page layout
 
-# In[26]:
+
 
 
 # Profile page for Mary
@@ -867,8 +825,6 @@ profile_form_1 = html.Div(
                 dbc.Table(table_header + table_body, bordered=True)
                 ], style=CONTENT_STYLE)
 
-
-# In[27]:
 
 
 # Profile page for Alex
@@ -994,7 +950,6 @@ profile_form_2 = html.Div(
 
 # ###### Defining Page layout
 
-# In[28]:
 
 
 #Defining the Page layouts
@@ -1009,7 +964,6 @@ app.layout = html.Div([
 
 # ###### Login Page and Naviagtion Call Backs
 
-# In[29]:
 
 
 # Login Page Call Back
@@ -1076,15 +1030,11 @@ def display_page(pathname):
 
 # ### Dashboard Initialized
 
-# In[ ]:
 
 
 # Initializing the dashboard.Dashboard can be accessed by clicking the URL in the output < http://127.0.0.1:8050/ >
 if __name__ == '__main__':
     app.run_server()
-
-
-# In[ ]:
 
 
 
