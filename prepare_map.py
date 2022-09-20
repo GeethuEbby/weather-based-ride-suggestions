@@ -30,7 +30,7 @@ def map_html(lat,lng,gas_veh_subset,fuel_type,p_name,dist,ex_veh_set):
                       icon= folium.Icon(icon="motorcycle",prefix="fa",color="red", icon_color='lightcoral')).add_to(m)
         if (row["vehicle_type"].startswith('passenger')): 
             folium.Marker(location=[row["lat"], row["lon"]], 
-                      popup="private",
+                      popup="passenger carrier",
                       icon= folium.Icon(icon="bus",prefix="fa",color="red", icon_color='lightblue')).add_to(m)
 
             
