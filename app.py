@@ -221,14 +221,14 @@ style={'margin-left':'53%','padding-top':'30px'}),
 html.Div(
     [
         dbc.Button(
-            "Click Me",
+            "Help",
             id="component-target",
             n_clicks=0,
         ),
         dbc.Popover(
             [
-                dbc.PopoverHeader("Popover header"),
-                dbc.PopoverBody("And here's some amazing content. Cool!"),
+                dbc.PopoverHeader("User Profiles"),
+                dbc.PopoverBody("Credentials:"+<br>+"mary/mary"+<br>+"alex/alex"),
             ],
             target="component-target",
             trigger="click",
