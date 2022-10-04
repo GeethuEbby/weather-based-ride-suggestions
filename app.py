@@ -217,6 +217,19 @@ html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color":
     "display": "inline-block",
     "height": "35px",
     "border-radius": "9px"}),
+    dbc.Button(
+        "Help",
+        id="component-target",
+        n_clicks=0,
+    ),
+    dbc.Popover(
+        [
+        dbc.PopoverHeader("User Profiles"),
+        dbc.PopoverBody("Credentials: \n mary/mary \n alex/alex"),
+        ],
+     target="component-target",
+    trigger="click",
+    ),
 style={'margin-left':'53%','padding-top':'30px'}),
 html.Div(
     [
