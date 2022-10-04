@@ -208,33 +208,7 @@ style={'margin-left':'35%','width':'450px','height':'45px','padding':'10px','mar
 'font-size':'16px','border-width':'3px','border-color':'#a0a3a2',
 }),
 ),
-html.Div(
-html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color": "white","border": "none",
-    "font-weight": "bold",
-    "text-align": "center",
-    "text-decoration": "none",
-    "background-color": "rgb(13, 110, 253)",
-    "display": "inline-block",
-    "height": "35px",
-    "border-radius": "9px"}),
-style={'margin-left':'53%','padding-top':'30px'}),
-html.Div(
-    [
-        dbc.Button(
-            "Help",
-            id="component-target",
-            n_clicks=0,
-        ),
-        dbc.Popover(
-            [
-                dbc.PopoverHeader("User Profiles"),
-                dbc.PopoverBody("Credentials: mary/mary alex/alex"),
-            ],
-            target="component-target",
-            trigger="click",
-        ),
-    ]
-),
+
 html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left": "50%",
     "font-weight": "bold",
     "text-align": "center",
