@@ -234,7 +234,7 @@ html.Div(
             trigger="click",
         ),
     ]
-)
+),
 html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left": "50%",
     "font-weight": "bold",
     "text-align": "center",
