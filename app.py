@@ -228,7 +228,7 @@ html.Div(
         dbc.Popover(
             [
                 dbc.PopoverHeader("User Profiles"),
-                dbc.PopoverBody("Credentials:"+<br>+"mary/mary"+<br>+"alex/alex"),
+                dbc.PopoverBody("Credentials: mary/mary alex/alex"),
             ],
             target="component-target",
             trigger="click",
