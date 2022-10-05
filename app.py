@@ -220,6 +220,24 @@ html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color":
     "border-radius": "9px"}),
     
 style={'margin-left':'53%','padding-top':'30px'}),   
+  
+       html.Div(
+    [
+        dbc.Button(
+            "Click Me",
+            id="component-target",
+            n_clicks=0,
+        ),
+        dbc.Popover(
+            [
+                dbc.PopoverHeader("Popover header"),
+                dbc.PopoverBody("And here's some amazing content. Cool!"),
+            ],
+            target="component-target",
+            trigger="click",
+        ),
+    ]
+), 
     
 html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left": "50%",
     "font-weight": "bold",
