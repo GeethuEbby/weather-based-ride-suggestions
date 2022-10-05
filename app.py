@@ -231,7 +231,7 @@ style={'margin-left':'53%','padding-top':'30px'}),
         dbc.Popover(
             [
                 dbc.PopoverHeader("Popover header"),
-                dbc.PopoverBody("And here's some amazing content. Cool!"),
+                dbc.PopoverBody('your first line\nyour second line', style={'white-space':'pre'}),
             ],
             target="component-target",
             trigger="click",
