@@ -224,7 +224,7 @@ style={'margin-left':'53%','padding-top':'30px'}),
        html.Div(
     [
         dbc.Button(
-            "Click Me",
+            "Help",
             id="component-target",
             n_clicks=0,
         ),
