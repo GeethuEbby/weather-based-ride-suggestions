@@ -231,7 +231,7 @@ style={'margin-left':'53%','padding-top':'30px'}),
         dbc.Popover(
             [
                 dbc.PopoverHeader("Login Information"),
-                dbc.PopoverBody('mary/mary \nalex/alex', style={'white-space':'pre'}),
+                dbc.PopoverBody('User - Mary Jane\nFuel Preference - Electric\nCredentials - mary/mary \n\n\nUser - Alex  Joe\nFuel Preference - Petrol/Diesel\nCredentials - alex/alex', style={'white-space':'pre'}),
             ],
             target="component-target",
             trigger="click",
