@@ -236,7 +236,7 @@ style={'margin-left':'53%','padding-top':'30px'}),
             target="component-target",
             trigger="click",
         ),
-    ]
+    ],style={'margin-left':'53%','padding-top':'30px'}
 ), 
     
 html.Div(id='output1',style={'font-size':'16px',"color": "white","padding-left": "50%",
