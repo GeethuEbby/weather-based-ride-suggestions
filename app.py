@@ -218,7 +218,32 @@ html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color":
     "display": "inline-block",
     "height": "35px",
     "border-radius": "9px"}),
-style={'margin-left':'45%','padding-top':'30px'}),   
+style={'margin-left':'45%','padding-top':'30px'},
+html.Div(
+    [
+        dbc.Button(
+            "Help",
+            id="component-target",
+            n_clicks=0,style={'font-size':'16px',"color": "white","border": "none",
+    "font-weight": "bold",
+    "text-align": "center",
+    "text-decoration": "none",
+    "background-color": "rgb(13, 110, 253)",
+    "display": "inline-block",
+    "height": "35px",
+    "border-radius": "9px"}
+        ),
+        dbc.Popover(
+            [
+                dbc.PopoverHeader("Login Information"),
+                dbc.PopoverBody('User - Mary Jane\nFuel Preference - Electric\nCredentials - mary/mary \n\n\nUser - Alex  Joe\nFuel Preference - Petrol/Diesel\nCredentials - alex/alex', style={'white-space':'pre'}),
+            ],
+            target="component-target",
+            trigger="click",
+        ),
+    ],style={'margin-left':'55%','padding-top':'30px,'}
+), 
+),   
   
        html.Div(
     [
