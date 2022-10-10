@@ -218,7 +218,7 @@ html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color":
     "display": "inline-block",
     "height": "35px",
     "border-radius": "9px"}),
-style={'margin-left':'53%','padding-top':'30px'}),  
+style={'margin-left':'53%','padding-top':'22px'}),  
 html.Div(
     [
         dbc.Button(
@@ -230,7 +230,8 @@ html.Div(
     "text-decoration": "none",
     "background-color": "rgb(13, 110, 253)",
     "display": "inline-block",
-    "height": "35px",
+    "height": "33px",
+    "width": "56px",                        
     "border-radius": "9px"}
         ),
         dbc.Popover(
