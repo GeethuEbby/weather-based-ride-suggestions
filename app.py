@@ -241,7 +241,7 @@ html.Div(
             target="component-target",
             trigger="click",
         ),
-    ],style={'margin-left':'55%','padding-top':'30px,'}
+    ],style={'margin-left':'53%','padding-top':'22px'}
 ), 
       
     
