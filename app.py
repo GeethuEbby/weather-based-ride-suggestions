@@ -218,7 +218,7 @@ html.Button('Login', id='verify', n_clicks=0, style={'font-size':'16px',"color":
     "display": "inline-block",
     "height": "35px",
     "border-radius": "9px",
-    "margin-left":"45%","padding-top":"30px"}),
+    "margin-left":"45%","padding-top":"30px"}),style={'margin-left':'55%','padding-top':'30px,'}
 ),  
   
     
